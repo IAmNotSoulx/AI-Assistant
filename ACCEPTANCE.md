@@ -52,3 +52,21 @@
 - requirements.txt present
 - README has copy/paste steps for Windows PowerShell
 - Optional: GitHub Actions workflow runs pytest on PRs
+
+## I) Game Profiles
+- UI includes a Profile selector (dropdown or segmented control) with:
+  - Siege, Rust, Valorant, D&D
+- Selecting a profile changes the assistant behavior:
+  - A profile label is visible in the UI.
+  - Quick action buttons update to that profile’s set.
+  - Browsing queries automatically include profile keywords.
+
+## J) Quick Actions
+- The UI shows 4–6 quick action buttons per profile.
+- Clicking a quick action fills the input box (or sends immediately) with a templated prompt.
+
+## K) Profile Defaults (Open App / URLs)
+- For Siege/Rust/Valorant profiles:
+  - “Open App” includes sensible defaults (launchers) and a “Custom path…” option.
+- For D&D profile:
+  - “Open App” includes opening a default URL (e.g., a D&D reference site) instead of a launcher.
