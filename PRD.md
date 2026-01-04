@@ -76,3 +76,8 @@ The assistant should prioritize:
 - settings optimization advice (FPS, latency, graphics, input, sensitivity)
 - guides/meta summaries (browsing + sources)
 - D&D rules clarifications and encounter/character brainstorming
+
+  ## User Context injection
+- If USER_CONTEXT.md exists, the assistant must read it and automatically include it as additional context in the system prompt for every conversation.
+- The UI Settings should have:
+  - “Edit User Context” button that opens USER_CONTEXT.md in the default editor (or opens a simple text editor modal).
