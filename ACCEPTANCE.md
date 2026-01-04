@@ -1,47 +1,54 @@
 # Acceptance Criteria (v1)
 
-## A. App boots and runs
-- App launches on Windows with a visible chat UI.
-- README includes setup/run steps that work from a clean machine.
+## A) Launch + UI
+- App launches on Windows 11.
+- Main window shows:
+  - chat transcript
+  - input box + Send
+  - buttons: Capture Screen, Open App, Settings
+- UI remains responsive during tool calls (use threads/async where needed).
 
-## B. Chat Q&A
-- When user asks a general question, assistant responds with a coherent answer.
-- Provider selection works:
-  - If only OpenAI key is set, OpenAI provider works and Anthropic is disabled (and vice versa).
-  - If neither key exists, app shows a clear error state and does not crash.
+## B) Q&A (no browsing)
+- If user asks a general question, assistant responds (using provider model).
+- If no keys are configured, app shows a clear “No provider configured” message and does not crash.
 
-## C. Open apps
-- User can click “Open App” and select from:
-  - a small curated list (Notepad, Calculator, Chrome) + a “Custom path…” option.
-- Assistant can also open apps via chat command/tool call.
-- Opening an app does not freeze the UI.
+## C) Open App
+- “Open App” supports a curated list + “Custom path…”
+  - Steam, Discord, Chrome, Notepad, Calculator (minimum set)
+- Can also open by chat command/tool call.
+- Returns success/failure message in chat.
 
-## D. Screen capture + vision
-- “Capture Screen” saves a timestamped screenshot to ./data/screens and shows a thumbnail preview.
+## D) Screen vision
+- Capture Screen saves an image to ./data/screens with timestamp filename.
+- After capture, app shows a thumbnail preview in UI.
 - If “Allow sending screenshots” is OFF:
-  - assistant can still save screenshot locally but must not call vision APIs.
+  - describe_screen is blocked with an explanation.
 - If ON:
-  - user can ask: “What’s on my screen?” and receive a description.
-  - user can ask a targeted question: “What does this error message mean?” and assistant answers using what it sees.
+  - Asking “What’s on my screen?” returns a description.
+  - Asking “Explain this error” returns an explanation referencing visible text.
 
-## E. Web login helper (Playwright persistent profile)
-- Assistant can open a URL in a persistent browser profile.
-- Sessions persist across runs (cookie/session reuse).
-- No attempt is made to read passwords from other apps or capture credentials.
-- For MFA/captcha, assistant instructs the user to complete it manually.
+## E) Browsing
+- If “Allow browsing” is ON:
+  - Asking “Find sources about X” triggers web_search + fetch_url, then answers with citations (URLs listed).
+  - At least 2 sources are used when available.
+- If OFF:
+  - browsing tools are blocked with an explanation.
 
-## F. Automation gating (if implemented)
-- Mouse/keyboard automation is disabled by default.
-- Enabling it requires explicit toggle in settings.
-- Each automation action requires confirmation that displays:
-  - action type
-  - parameters (text to type, coordinates to click)
-  - cancel option
+## F) Source handling
+- When using browsing, assistant response includes:
+  - a short answer
+  - “Sources:” list of URLs used
 
-## G. Quality
-- `pytest` test suite runs.
-- Basic unit tests exist for:
+## G) Tests
+- `pytest` passes.
+- Tests exist for:
   - settings load/save
-  - tool registry
-  - screenshot capture function (mocked where needed)
-  - provider selection logic (mocked network)
+  - tool registry + dispatch
+  - capture_screen (can be integration-ish but should skip in CI if no display; provide fallback)
+  - browsing pipeline (fully mocked HTTP/search)
+  - provider selection logic (mocked)
+
+## H) Repo quality
+- requirements.txt present
+- README has copy/paste steps for Windows PowerShell
+- Optional: GitHub Actions workflow runs pytest on PRs
