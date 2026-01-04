@@ -1,0 +1,84 @@
+{
+  "profiles": [
+    {
+      "id": "siege",
+      "name": "Rainbow Six Siege",
+      "keywords": ["Rainbow Six Siege", "R6", "Siege", "Ubisoft Connect", "operators", "ranked"],
+      "system_prefix": "You are a gaming helper specialized in Rainbow Six Siege. Prioritize troubleshooting, settings optimization (FPS/latency), and clear actionable steps. If browsing, cite sources.",
+      "quick_actions": [
+        {"label": "Explain screen error", "prompt": "I captured my screen. Explain the error/message and what to do next."},
+        {"label": "Optimize settings", "prompt": "Recommend Siege graphics + display settings for high FPS and low input latency. Ask me only for missing key details."},
+        {"label": "Sensitivity help", "prompt": "Help me convert sensitivity/DPI and suggest a consistent ADS setup. Ask for my DPI, in-game sens, and ADS multiplier."},
+        {"label": "Patch notes summary", "prompt": "Browse and summarize the latest Siege patch notes. Include Sources."},
+        {"label": "Operator advice", "prompt": "Suggest operator picks and basic strats for my playstyle (anchor/roam/support). Ask me my role and rank."}
+      ],
+      "app_targets": [
+        {"label": "Ubisoft Connect", "type": "known_app", "value": "ubisoftconnect"},
+        {"label": "Steam", "type": "known_app", "value": "steam"},
+        {"label": "Discord", "type": "known_app", "value": "discord"}
+      ],
+      "default_urls": [
+        {"label": "Siege patch notes (search)", "url": "https://www.google.com/search?q=Rainbow+Six+Siege+patch+notes"}
+      ]
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "keywords": ["Rust game", "Facepunch", "wipe", "bases", "electricity", "farming", "raiding"],
+      "system_prefix": "You are a gaming helper specialized in Rust. Prioritize practical guides, base/electricity tips, farming, raid math, and troubleshooting. If browsing, cite sources.",
+      "quick_actions": [
+        {"label": "Explain screen error", "prompt": "I captured my screen. Explain what I’m seeing and how to fix it."},
+        {"label": "Wipe prep checklist", "prompt": "Make me a wipe-day checklist for a solo/duo. Ask my server type and goals (PvP/farm/raid)."},
+        {"label": "Electricity help", "prompt": "Help me design a Rust electricity setup. Ask what devices I need powered and my power sources."},
+        {"label": "Raid cost calc", "prompt": "Help me calculate the cheapest raid path for a base piece. Ask what type/level (stone/metal/armored) and door types."},
+        {"label": "Patch notes summary", "prompt": "Browse and summarize the latest Rust update/devblog. Include Sources."}
+      ],
+      "app_targets": [
+        {"label": "Steam", "type": "known_app", "value": "steam"},
+        {"label": "Discord", "type": "known_app", "value": "discord"}
+      ],
+      "default_urls": [
+        {"label": "Rust update notes (search)", "url": "https://www.google.com/search?q=Rust+update+notes+Facepunch"}
+      ]
+    },
+    {
+      "id": "valorant",
+      "name": "Valorant",
+      "keywords": ["VALORANT", "Riot", "agents", "patch notes", "ranked", "crosshair", "sensitivity"],
+      "system_prefix": "You are a gaming helper specialized in Valorant. Prioritize settings optimization, aim consistency, agent/role guidance, and troubleshooting. If browsing, cite sources.",
+      "quick_actions": [
+        {"label": "Explain screen error", "prompt": "I captured my screen. Explain the message/error and next steps."},
+        {"label": "FPS + latency setup", "prompt": "Recommend Valorant settings for FPS and low input latency. Ask my GPU/CPU/monitor Hz and if I use G-Sync/FreeSync."},
+        {"label": "Sensitivity convert", "prompt": "Help me convert my sensitivity/DPI and keep consistent aim. Ask my DPI and in-game sens."},
+        {"label": "Patch notes summary", "prompt": "Browse and summarize the latest Valorant patch notes. Include Sources."},
+        {"label": "Role/agent picks", "prompt": "Suggest agents based on my role (duelist/controller/sentinel/initiator) and map preferences. Ask my rank and role."}
+      ],
+      "app_targets": [
+        {"label": "Riot Client", "type": "known_app", "value": "riotclient"},
+        {"label": "Discord", "type": "known_app", "value": "discord"}
+      ],
+      "default_urls": [
+        {"label": "Valorant patch notes (search)", "url": "https://www.google.com/search?q=Valorant+patch+notes"}
+      ]
+    },
+    {
+      "id": "dnd",
+      "name": "Dungeons & Dragons",
+      "keywords": ["D&D", "Dungeons and Dragons", "5e", "rules", "classes", "spells", "encounters"],
+      "system_prefix": "You are a tabletop RPG helper for Dungeons & Dragons. Provide rules explanations, build ideas, encounter design, and DM tools. Avoid reproducing long copyrighted text; summarize and cite sources when browsing.",
+      "quick_actions": [
+        {"label": "Rules question", "prompt": "Answer this D&D rules question and explain the ruling with a short example: [paste question]."},
+        {"label": "Build idea", "prompt": "Give me 3 character build concepts for level [X] with a brief playstyle and key choices."},
+        {"label": "Encounter builder", "prompt": "Design an encounter for a party of [N] level [X] characters with terrain, objectives, and 2 variants (easy/hard)."},
+        {"label": "Spell shortlist", "prompt": "Recommend a shortlist of strong spells for a [class] at level [X], grouped by purpose (damage/control/utility)."},
+        {"label": "Lore brainstorm", "prompt": "Help me brainstorm a quest hook and 3 twists for a fantasy campaign with [theme]."}
+      ],
+      "app_targets": [
+        {"label": "Open D&D reference (URL)", "type": "url", "value": "https://www.dndbeyond.com/"}
+      ],
+      "default_urls": [
+        {"label": "D&D rules reference (search)", "url": "https://www.google.com/search?q=D%26D+5e+rules+reference"}
+      ]
+    }
+  ]
+}
