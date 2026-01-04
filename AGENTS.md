@@ -1,17 +1,9 @@
 # Agent Instructions
 
-## Project rules
-- Keep v1 minimal and reliable; prefer simple implementations.
-- Do not add features not required by PRD/Acceptance.
-- Never store API keys in repo or settings.json.
-- Screenshot upload to provider must be behind an explicit user toggle.
-
-## Implementation expectations
-- Provide a working Windows app using PySide6.
-- Provide a clean module layout under src/ai_assistant.
-- Provide pytest tests with network calls mocked.
-- Provide README with copy-paste setup instructions for Windows.
-
-## Tooling
-- Use requirements.txt (no heavy tooling required).
-- Use black or ruff only if it improves clarity (optional).
+- Build v1 minimal and reliable; do not add unrelated features.
+- No app login automation.
+- No in-game automation/macros.
+- Screenshot uploads must be gated by Settings toggle (default OFF).
+- Browsing answers must include Sources: URL list.
+- Mock all network calls in tests.
+- Keep dependencies reasonable; prefer simple solutions.
