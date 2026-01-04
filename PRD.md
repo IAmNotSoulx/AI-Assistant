@@ -48,3 +48,31 @@ A Windows desktop assistant with a chat UI optimized for gaming support. It can:
 - Screen capture: mss (fast) + Pillow for preview
 - Web:
   - search adapter (s
+
+## Game Profiles (v1)
+The app includes a Profile selector with 4 built-in profiles:
+- Rainbow Six Siege
+- Rust
+- Valorant
+- Dungeons & Dragons
+
+Each profile defines:
+- Default app launch targets (where applicable)
+- Default reference URLs (where applicable)
+- Suggested “quick prompts” (buttons) that insert well-formed questions into chat
+- A short profile-specific system prompt prefix that biases the assistant toward relevant help
+
+### Profile behavior
+- Selecting a profile updates:
+  - the assistant’s system prompt prefix
+  - the visible quick action buttons
+  - default “Open App” targets (when configured)
+  - browsing queries (adds profile keywords to improve relevance)
+
+### “Gaming helper” focus
+The assistant should prioritize:
+- troubleshooting errors (including from screenshots)
+- patch notes summaries (browsing + sources)
+- settings optimization advice (FPS, latency, graphics, input, sensitivity)
+- guides/meta summaries (browsing + sources)
+- D&D rules clarifications and encounter/character brainstorming
