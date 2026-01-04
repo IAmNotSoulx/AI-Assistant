@@ -1,71 +1,50 @@
-# AI-Assistant (Desktop)
+# AI-Assistant (Desktop Gaming Helper)
 
 ## Summary
-A local-first Windows desktop assistant with a chat UI that can:
-- answer questions using an LLM,
-- open applications,
-- capture the current screen and describe/comment on it using a vision-capable model,
-- assist with web logins by launching a controlled browser profile (persistent session).
+A Windows desktop assistant with a chat UI optimized for gaming support. It can:
+- answer questions via LLM,
+- browse the web (search + fetch pages) and answer with citations,
+- capture the user’s screen and explain what it sees (errors, menus, settings screens),
+- open common gaming apps and URLs.
 
 ## Target platform
-- Windows 11 (primary). Cross-platform is a stretch goal.
+- Windows 11 (v1)
 
-## Goals
-1. Chat UI (desktop app) where user can ask questions.
-2. “Tools” the assistant can call:
-   - Open an app (e.g., Discord, Chrome, Steam) and optionally bring it to front.
-   - Open a URL in a controlled browser.
-   - Capture screen and send to vision model for description and Q&A about what’s visible.
-3. Simple settings UI:
-   - Choose provider: OpenAI or Anthropic (key in .env; provider can be disabled if no key).
-   - Toggle: “Allow sending screenshots to provider” (default OFF).
-   - Toggle: “Allow automation (mouse/keyboard)” (default OFF).
-4. Safety/confirmation UX (even for personal use):
-   - Any automation action (typing/clicking) must show a confirmation dialog with a preview of what will happen.
+## Primary use-cases
+1) “What does this error mean?” (user clicks Capture Screen or asks “explain this”)
+2) “Summarize the latest patch notes for X” (browse + cite sources)
+3) “Best settings for my situation” (based on user info + browsing + reasoning)
+4) “Open Discord / Steam / Ubisoft Connect / Siege / Rust / OBS / MSI Afterburner”
+5) “Find me a guide for … and summarize it”
+
+## Goals (v1)
+- Desktop chat UI (PySide6) with:
+  - chat history
+  - buttons: Capture Screen, Open App, Browse (optional), Settings
+- LLM provider abstraction:
+  - OpenAI and Anthropic supported (keys via .env)
+- Tools callable by the assistant:
+  - open_app(name_or_path, args?)
+  - open_url(url)
+  - capture_screen() -> saves screenshot locally and returns path
+  - describe_screen(question, screenshot_path) -> vision model call (gated by toggle)
+  - web_search(query) -> list of results (title, url, snippet)
+  - fetch_url(url) -> extracts readable text
+- Browsing must produce answers with source links/citations.
 
 ## Non-goals (v1)
-- Universal “log into any native desktop app” automation.
-- Running as a system-level keylogger or capturing passwords from other apps.
-- Full self-updating, cloud sync, multi-device.
+- Logging into apps.
+- Automating in-game actions (no aim-assist, recoil macros, etc.).
+- System-wide spying/stealth behavior.
 
-## Login approach (v1)
-- Web logins only:
-  - The assistant can launch a Playwright-controlled Chromium with a persistent profile directory.
-  - User completes login manually the first time.
-  - Subsequent sessions reuse cookies/session, so assistant can navigate authenticated pages.
-- Native app logins:
-  - Out of scope for v1 unless the user defines a per-app macro (future: macro runner).
-
-## UX requirements
-- Main window: chat transcript + input box + buttons:
-  - “Capture Screen”
-  - “Open App”
-  - “Settings”
-- Tray icon with “Show/Hide” and “Quit”.
-- Optional hotkey for screen capture (nice-to-have).
+## Privacy toggles
+- “Allow sending screenshots to AI” default OFF
+- “Allow browsing (network requests)” default ON (since you want browsing)
+- “Redact sensitive info in screenshots” (basic: blur taskbar clock + notifications area) optional
 
 ## Architecture
-- Python 3.11+
-- UI: PySide6 (Qt)
-- Core agent:
-  - Maintains conversation history.
-  - Uses “tool calling” style: model returns either a direct answer or a tool request.
-  - Tool execution returns results back to the model for final response.
-- Tools:
-  - open_app(app_name, args?)
-  - open_url(url)
-  - capture_screen() -> image bytes saved locally + path
-  - describe_screen(question?) -> calls vision model with screenshot (only if allowed)
-  - (optional) automation: type_text(text), click(x,y) — behind confirmation + toggle
-
-## Storage
-- Local folder: ./data
-- Logs: ./data/logs
-- Screenshots: ./data/screens
-- Settings: ./data/settings.json (never store API keys here)
-
-## Configuration
-- .env:
-  - OPENAI_API_KEY=
-  - ANTHROPIC_API_KEY=
-  - DEFAULT_PROVIDER=openai|anthropic
+- Language: Python 3.11+
+- UI: PySide6
+- Screen capture: mss (fast) + Pillow for preview
+- Web:
+  - search adapter (s
