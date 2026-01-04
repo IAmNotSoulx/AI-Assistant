@@ -70,3 +70,8 @@
   - “Open App” includes sensible defaults (launchers) and a “Custom path…” option.
 - For D&D profile:
   - “Open App” includes opening a default URL (e.g., a D&D reference site) instead of a launcher.
+
+## L) User Context
+- If USER_CONTEXT.md exists, its contents are included in the assistant’s system prompt.
+- A Settings action exists to open/edit USER_CONTEXT.md.
+- Changing USER_CONTEXT.md takes effect without reinstalling (restart app is acceptable).
